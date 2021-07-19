@@ -18,6 +18,7 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *modeController;
 @end
 
 @implementation ViewController
@@ -95,6 +96,14 @@
 
 - (UIImage *)backgroundImageForCard:(Card *)card {
     return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
+}
+
+- (IBAction)touchResetGameButton:(UIButton *)sender {
+  _game = [[CardMatchingGame alloc]
+           initWithCardCount:[self.cardButtons count]
+           usingDeck:[self createDeck]];
+  [self updateUI];
+  self.flipCount = 0;
 }
 
 @end
