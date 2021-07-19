@@ -72,8 +72,13 @@
 //        [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"] forState:UIControlStateNormal];
 //        [sender setTitle:randomCard.contents forState:UIControlStateNormal];
 //    }
+    if ([self.modeController isEnabled]) {
+        [self.modeController setEnabled:false];
+    }
+    
     NSInteger chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex];
+    
     [self updateUI];
     
     self.flipCount++; // calls getter AND setter
@@ -99,11 +104,12 @@
 }
 
 - (IBAction)touchResetGameButton:(UIButton *)sender {
-  _game = [[CardMatchingGame alloc]
+    _game = [[CardMatchingGame alloc]
            initWithCardCount:[self.cardButtons count]
            usingDeck:[self createDeck]];
-  [self updateUI];
-  self.flipCount = 0;
+    [self updateUI];
+    self.flipCount = 0;
+    [self.modeController setEnabled:true];
 }
 
 @end
