@@ -21,6 +21,7 @@
 		098E9F042671BD1A00635BD6 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 098E9F032671BD1A00635BD6 /* Deck.m */; };
 		098E9F072671C05700635BD6 /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 098E9F062671C05700635BD6 /* PlayingCardDeck.m */; };
 		8495BBC6269B30EB001D1B27 /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495BBC5269B30EB001D1B27 /* CardMatchingGame.m */; };
+		84B05C2B26A71822009CD8A0 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B05C2A26A71822009CD8A0 /* Logger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		098E9F062671C05700635BD6 /* PlayingCardDeck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayingCardDeck.m; sourceTree = "<group>"; };
 		8495BBC5269B30EB001D1B27 /* CardMatchingGame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardMatchingGame.m; sourceTree = "<group>"; };
 		8495BBC7269B311D001D1B27 /* CardMatchingGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardMatchingGame.h; sourceTree = "<group>"; };
+		84B05C2926A71810009CD8A0 /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		84B05C2A26A71822009CD8A0 /* Logger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +107,9 @@
 				098E9EE8265A994B00635BD6 /* MatchismoUITests */,
 				098E9EC0265A994400635BD6 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		098E9EC0265A994400635BD6 /* Products */ = {
 			isa = PBXGroup;
@@ -166,6 +171,8 @@
 				098E9F00265E8D5300635BD6 /* PlayingCard.m */,
 				098E9F052671C03300635BD6 /* PlayingCardDeck.h */,
 				098E9F062671C05700635BD6 /* PlayingCardDeck.m */,
+				84B05C2926A71810009CD8A0 /* Logger.h */,
+				84B05C2A26A71822009CD8A0 /* Logger.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,6 +315,7 @@
 				098E9EC4265A994400635BD6 /* AppDelegate.m in Sources */,
 				098E9ED5265A994A00635BD6 /* main.m in Sources */,
 				098E9EC7265A994500635BD6 /* SceneDelegate.m in Sources */,
+				84B05C2B26A71822009CD8A0 /* Logger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

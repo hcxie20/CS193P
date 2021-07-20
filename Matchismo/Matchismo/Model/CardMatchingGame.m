@@ -17,6 +17,8 @@
 @implementation CardMatchingGame
 
 @synthesize cards = _cards;
+@synthesize gameMode = _gameMode;
+@synthesize logger = _logger;
 
 static const int MATCH_BONUS = 4;
 static const int MISMATCH_PENALTY = 2;
@@ -25,6 +27,23 @@ static const int COST_TO_CHOOSE = 1;
 - (NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
+}
+
+- (cardMatchingGameMode)gameMode {
+    return (!_gameMode) ? cardMatchingGameModeBiCardsMode : _gameMode;
+}
+
+- (void)alterGameMode:(cardMatchingGameMode)gameMode {
+    // mode should be
+    // 0: 2 - cards match
+    // 1: 3 - cards match
+    if (gameMode < 0 || gameMode > cardMatchingGameModeLastGameModeValue) return;
+    _gameMode = gameMode;
+}
+
+- (Logger *)logger {
+    if (!_logger) _logger = [[Logger alloc] init];
+    return _logger;
 }
 
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck {
@@ -51,31 +70,54 @@ static const int COST_TO_CHOOSE = 1;
 
 - (void)chooseCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
-    
-    if (!card.isMatched) {
-        if (card.isChosen) {
-            card.chosen = NO;
-        } else {
-            // match aginst other chosen cards
-            for (Card *otherCard in self.cards) {
-                if (otherCard.isChosen && !otherCard.isMatched) {
-                    int matchScore = [card match:@[otherCard]];
-                    if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS;
-                        otherCard.matched = YES;
-                        card.matched = YES;
-                    } else {
-                        self.score -= MISMATCH_PENALTY;
-                        otherCard.chosen = NO;
-                    }
-                    break;
-                }
-            }
-            self.score -= COST_TO_CHOOSE;
-            card.chosen = YES;
-        }
+
+    if (card.isMatched) return;
+
+    if (card.isChosen) {
+        card.chosen = NO;
+        return;
     }
+
+    [self checkMatchingCards:card];
+
+    self.score -= COST_TO_CHOOSE;
+    card.chosen = YES;
+}
+
+- (void)checkMatchingCards:(Card *)selectedCard {
+    __block NSMutableArray *faceUpCards = [[NSMutableArray alloc] init];
     
+    [self.cards
+     enumerateObjectsUsingBlock:
+     ^(Card *otherCard, NSUInteger index, BOOL *stop){
+        if (!otherCard.isChosen || otherCard.isMatched) return;
+
+        // Found a face-up card
+        [faceUpCards addObject:otherCard];
+        if (self.gameMode == cardMatchingGameModeBiCardsMode) *stop = TRUE;
+        
+        if (self.gameMode == cardMatchingGameModeTriCardsMode && [faceUpCards count] == 2) *stop = TRUE;
+    }];
+    
+    // if no face-up card found
+    if ([faceUpCards count] == 0) {
+        [_logger addLog:[NSString stringWithFormat:@"No other face up card found %@", selectedCard]];
+        return;
+    }
+    // if in tri-cards mode and only 2 cards face up
+    if (self.gameMode == cardMatchingGameModeTriCardsMode && [faceUpCards count] != 2) return;
+    
+    NSInteger matchScore = [selectedCard match:faceUpCards];
+    
+    if (matchScore) {
+        self.score += matchScore * MATCH_BONUS;
+        for (Card *otherCard in faceUpCards) otherCard.matched = YES;
+        selectedCard.matched = YES;
+        return;
+    }
+        
+    self.score -= MISMATCH_PENALTY;
+    for (Card *otherCard in faceUpCards) otherCard.chosen = NO;
 }
 
 @end

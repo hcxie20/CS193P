@@ -62,16 +62,6 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-    // sender: the button
-//    if ([sender.currentTitle length]) {
-//        [sender setBackgroundImage:[UIImage imageNamed:@"cardback"] forState:UIControlStateNormal];
-//        [sender setTitle:@"" forState:UIControlStateNormal];
-//    } else {
-//        Card *randomCard = [self.deck drawRandomCard];
-//        if (!randomCard) { return; }
-//        [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"] forState:UIControlStateNormal];
-//        [sender setTitle:randomCard.contents forState:UIControlStateNormal];
-//    }
     if ([self.modeController isEnabled]) {
         [self.modeController setEnabled:false];
     }
@@ -111,5 +101,28 @@
     self.flipCount = 0;
     [self.modeController setEnabled:true];
 }
+
+// Map UISegmentedControl index to game mode
+//+ (NSDictionary *)gameModeMap {
+//    return @{
+//        @0: gameModeAllowedBiCardsMode,
+//        @1: gameModeAllowedTriCardsMode,
+//    };
+//}
+
+- (IBAction)touchGameModeContorller:(UISegmentedControl *)sender {
+    cardMatchingGameMode gameMode = cardMatchingGameModeBiCardsMode;
+    
+    // todo: Find a way to remove this stupid switch case
+    switch ([self.modeController selectedSegmentIndex]) {
+        case 0: gameMode = cardMatchingGameModeBiCardsMode;
+            break;
+        case 1: gameMode = cardMatchingGameModeTriCardsMode;
+            break;
+    }
+    
+    [self.game alterGameMode: gameMode];
+}
+
 
 @end
