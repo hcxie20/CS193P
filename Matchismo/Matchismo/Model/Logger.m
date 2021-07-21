@@ -28,18 +28,30 @@
 
 @implementation Logger
 
-@synthesize logEntryList = _logEngryList;
+@synthesize logEntryList = _logEntryList;
+
+- (NSMutableArray *)logEntryList {
+    if (!_logEntryList) {
+        _logEntryList = [[NSMutableArray alloc] init];
+    }
+    
+    return _logEntryList;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Log: %@", self];
+}
 
 - (void)addLog:(NSString *)log {
-    [_logEngryList addObject:[LogEntry initWithNSString:log]];
+    [self.logEntryList addObject:[[LogEntry alloc] initWithNSString:log]];
 }
 
 - (NSArray *)showLogs {
-    return [_logEngryList copy];
+    return [self.logEntryList copy];
 }
 
 - (LogEntry *)lastLog {
-    return [_logEngryList lastObject];
+    return [self.logEntryList lastObject];
 }
 
 @end

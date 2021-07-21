@@ -46,6 +46,10 @@ static const int COST_TO_CHOOSE = 1;
     return _logger;
 }
 
+- (void)addLog:(NSString *)log {
+    [self.logger addLog:log];
+}
+
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck {
     self = [super init]; // super's designated initializer
     
@@ -101,11 +105,14 @@ static const int COST_TO_CHOOSE = 1;
     
     // if no face-up card found
     if ([faceUpCards count] == 0) {
-        [_logger addLog:[NSString stringWithFormat:@"No other face up card found %@", selectedCard]];
+        [self addLog:[NSString stringWithFormat:@"No other face-up card found. Card: %@", selectedCard]];
         return;
     }
     // if in tri-cards mode and only 2 cards face up
-    if (self.gameMode == cardMatchingGameModeTriCardsMode && [faceUpCards count] != 2) return;
+    if (self.gameMode == cardMatchingGameModeTriCardsMode && [faceUpCards count] == 1) {
+        [self addLog:[NSString stringWithFormat:@"Only one face-up card found. One more card needed. Card: %@", selectedCard]];
+        return;
+    }
     
     NSInteger matchScore = [selectedCard match:faceUpCards];
     

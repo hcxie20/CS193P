@@ -19,7 +19,11 @@
              @"8", @"9", @"10",@"J", @"Q", @"K"];
 }
 
-- (NSString *) contents
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%lu %@", (unsigned long)self.rank, self.suit];
+}
+
+- (NSString *)contents
 {
     NSArray *rankStrings = [PlayingCard rankStrings];
     return [rankStrings[self.rank]
