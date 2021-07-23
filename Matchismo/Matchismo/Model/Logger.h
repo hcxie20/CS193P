@@ -10,14 +10,34 @@
 
 #import "Foundation/Foundation.h"
 
+typedef NS_ENUM(NSInteger, logLevel) {
+    logLevelDebug = 10,
+    logLevelInfo = 20,
+    logLevelWarning = 30,
+    logLevelError = 40,
+    logLevelFatal = 50,
+};
+
 @interface LogEntry : NSObject
 - (instancetype)initWithNSString:(NSString *)log;
 @end
 
 @interface Logger : NSObject
-- (void)addLog:(NSString *)log;
+ - (void)addLog:(NSString *)log;
+ - (void)addLog:(NSString *)log logLevel:(logLevel)logLevel;
 - (NSArray *)showLogs;
 - (LogEntry *)lastLog;
+
+// todo: change to private method?
++ (Logger *)Logger;
++ (void)setLoggerLevel:(logLevel)logLevel;
+
++ (void)Debug:(NSString *)log;
++ (void)Info:(NSString *)log;
++ (void)Warning:(NSString *)log;
++ (void)Error:(NSString *)log;
++ (void)Fatal:(NSString *)log;
+
 @end
 
 #endif /* Logger_h */

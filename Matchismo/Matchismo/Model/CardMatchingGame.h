@@ -11,7 +11,6 @@
 #import "Foundation/Foundation.h"
 #import "Deck.h"
 #import "Card.h"
-#import "Logger.h"
 
 // shoule be in another file
 typedef NS_ENUM(NSInteger, cardMatchingGameMode) {
@@ -31,7 +30,6 @@ typedef NS_ENUM(NSInteger, cardMatchingGameMode) {
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readwrite) cardMatchingGameMode gameMode;
-@property (nonatomic, readwrite) Logger *logger;
 @end
 
 #endif /* Model_CardMatchingGame_h */

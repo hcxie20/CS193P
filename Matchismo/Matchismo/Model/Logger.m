@@ -23,19 +23,29 @@
 @end
 
 @interface Logger()
-@property (nonatomic, strong) NSMutableArray *logEntryList;
+// a better way to do this should be use a productor - consumer model
+@property (atomic, strong) NSMutableArray *logEntryList;
+@property (atomic) logLevel logLevel;
 @end
 
 @implementation Logger
 
-@synthesize logEntryList = _logEntryList;
-
-- (NSMutableArray *)logEntryList {
-    if (!_logEntryList) {
-        _logEntryList = [[NSMutableArray alloc] init];
-    }
++ (Logger *)Logger {
+    static Logger *sharedLogger = nil;
+    static dispatch_once_t onceTokenLoggerInit;
+    dispatch_once(&onceTokenLoggerInit, ^{
+        sharedLogger = [[self alloc] init];
+    });
     
-    return _logEntryList;
+    return sharedLogger;
+}
+
+- (instancetype)init {
+    self = [super init];
+    self.logEntryList = [[NSMutableArray alloc] init];
+    self.logLevel = logLevelInfo;
+    
+    return self;
 }
 
 - (NSString *)description {
@@ -46,12 +56,42 @@
     [self.logEntryList addObject:[[LogEntry alloc] initWithNSString:log]];
 }
 
+- (void)addLog:(NSString *)log logLevel:(logLevel)logLevel {
+    if (logLevel < self.logLevel) return;
+    
+    [self addLog:log];
+}
+
 - (NSArray *)showLogs {
     return [self.logEntryList copy];
 }
 
 - (LogEntry *)lastLog {
     return [self.logEntryList lastObject];
+}
+
++ (void)setLoggerLevel:(logLevel)logLevel {
+    [Logger Logger].logLevel = logLevel;
+}
+
++ (void)Debug:(NSString *)log {
+    [[Logger Logger] addLog:log logLevel:logLevelDebug];
+}
+
++ (void)Info:(NSString *)log {
+    [[Logger Logger] addLog:log logLevel:logLevelInfo];
+}
+
++ (void)Warning:(NSString *)log {
+    [[Logger Logger] addLog:log logLevel:logLevelWarning];
+}
+
++ (void)Error:(NSString *)log {
+    [[Logger Logger] addLog:log logLevel:logLevelError];
+}
+
++ (void)Fatal:(NSString *)log {
+    [[Logger Logger] addLog:log logLevel:logLevelFatal];
 }
 
 @end

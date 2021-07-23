@@ -8,17 +8,18 @@
 #import "CardMatchingGame.h"
 #import "Deck.h"
 #import "Card.h"
+#import "Logger.h"
 
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; // Cards
+@property (nonatomic, readwrite) Logger *logger;
 @end
 
 @implementation CardMatchingGame
 
 @synthesize cards = _cards;
 @synthesize gameMode = _gameMode;
-@synthesize logger = _logger;
 
 static const int MATCH_BONUS = 4;
 static const int MISMATCH_PENALTY = 2;
@@ -41,17 +42,11 @@ static const int COST_TO_CHOOSE = 1;
     _gameMode = gameMode;
 }
 
-- (Logger *)logger {
-    if (!_logger) _logger = [[Logger alloc] init];
-    return _logger;
-}
-
-- (void)addLog:(NSString *)log {
-    [self.logger addLog:log];
-}
-
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck {
     self = [super init]; // super's designated initializer
+    
+//    _logger = [Logger Logger];
+//    [Logger setLoggerLevel:logLevelDebug];
     
     if (self) {
         for (int i = 0; i < count; i++) {
@@ -105,12 +100,12 @@ static const int COST_TO_CHOOSE = 1;
     
     // if no face-up card found
     if ([faceUpCards count] == 0) {
-        [self addLog:[NSString stringWithFormat:@"No other face-up card found. Card: %@", selectedCard]];
+        [Logger Debug:[NSString stringWithFormat:@"No other face-up card found. Card: %@", selectedCard]];
         return;
     }
     // if in tri-cards mode and only 2 cards face up
     if (self.gameMode == cardMatchingGameModeTriCardsMode && [faceUpCards count] == 1) {
-        [self addLog:[NSString stringWithFormat:@"Only one face-up card found. One more card needed. Card: %@", selectedCard]];
+        [Logger Debug:[NSString stringWithFormat:@"Only one face-up card found. One more card needed. Card: %@", selectedCard]];
         return;
     }
     
