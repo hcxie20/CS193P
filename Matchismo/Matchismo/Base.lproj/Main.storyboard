@@ -184,6 +184,13 @@
                                     <action selector="touchGameModeContorller:" destination="BYZ-38-t0r" eventType="valueChanged" id="04Y-b4-zwX"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pe-Wr-7fW">
+                                <rect key="frame" x="16" y="705" width="350" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -191,6 +198,7 @@
                     <connections>
                         <outlet property="cardButton" destination="S8y-Qb-cUl" id="ppY-Wd-9Eq"/>
                         <outlet property="flipsLabel" destination="IkJ-vJ-UQc" id="9UU-o1-bVh"/>
+                        <outlet property="gameInfoLog" destination="2pe-Wr-7fW" id="zwb-sj-ifZ"/>
                         <outlet property="modeController" destination="P84-yE-qek" id="UM8-KW-7Q8"/>
                         <outlet property="scoreLabel" destination="2et-3a-cB6" id="qWW-hW-pwn"/>
                         <outletCollection property="cardButtons" destination="NXv-7c-GhX" id="gOm-RT-p1S"/>

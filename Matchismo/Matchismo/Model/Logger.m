@@ -20,6 +20,10 @@
     _logEntry = log;
     return self;
 }
+
+- (NSString *)logDetail {
+    return self.logEntry;
+}
 @end
 
 @interface Logger()
@@ -92,6 +96,10 @@
 
 + (void)Fatal:(NSString *)log {
     [[Logger Logger] addLog:log logLevel:logLevelFatal];
+}
+
++ (NSString *)lastLog {
+    return [[[Logger Logger] lastLog] logDetail];
 }
 
 @end

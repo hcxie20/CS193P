@@ -6,6 +6,8 @@
 //
 
 #import "ViewController.h"
+
+#import "Logger.h"
 #import "PlayingCardDeck.h"
 #import "PlayingCard.h"
 #import "CardMatchingGame.h"
@@ -19,6 +21,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeController;
+@property (weak, nonatomic) IBOutlet UILabel *gameInfoLog;
 @end
 
 @implementation ViewController
@@ -83,6 +86,9 @@
         cardButton.enabled = !card.isMatched;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
     }
+    
+    // Show log
+    [self.gameInfoLog setText:[Logger lastLog]];
 }
 
 - (NSString *)titleForCard:(Card *)card {
@@ -100,15 +106,8 @@
     [self updateUI];
     self.flipCount = 0;
     [self.modeController setEnabled:true];
+    [self.gameInfoLog setText:@"Game Restarted"];
 }
-
-// Map UISegmentedControl index to game mode
-//+ (NSDictionary *)gameModeMap {
-//    return @{
-//        @0: gameModeAllowedBiCardsMode,
-//        @1: gameModeAllowedTriCardsMode,
-//    };
-//}
 
 - (IBAction)touchGameModeContorller:(UISegmentedControl *)sender {
     cardMatchingGameMode gameMode = cardMatchingGameModeBiCardsMode;

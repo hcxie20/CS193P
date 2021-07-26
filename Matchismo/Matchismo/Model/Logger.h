@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, logLevel) {
 
 @interface LogEntry : NSObject
 - (instancetype)initWithNSString:(NSString *)log;
+- (NSString *)logDetail;
 @end
 
 @interface Logger : NSObject
@@ -37,6 +38,8 @@ typedef NS_ENUM(NSInteger, logLevel) {
 + (void)Warning:(NSString *)log;
 + (void)Error:(NSString *)log;
 + (void)Fatal:(NSString *)log;
+
++ (NSString *)lastLog;
 
 @end
 

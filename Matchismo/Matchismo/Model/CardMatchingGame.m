@@ -45,8 +45,7 @@ static const int COST_TO_CHOOSE = 1;
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck {
     self = [super init]; // super's designated initializer
     
-//    _logger = [Logger Logger];
-//    [Logger setLoggerLevel:logLevelDebug];
+    [Logger setLoggerLevel:logLevelDebug];
     
     if (self) {
         for (int i = 0; i < count; i++) {

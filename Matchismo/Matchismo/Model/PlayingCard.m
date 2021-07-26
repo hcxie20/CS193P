@@ -4,10 +4,10 @@
 //
 //  Created by XIE haochen on 5/26/21.
 //
+#import "PlayingCard.h"
 
 #import <Foundation/Foundation.h>
-
-#import "PlayingCard.h"
+#import "Logger.h"
 
 @implementation PlayingCard
 
@@ -61,15 +61,36 @@
 - (int)match:(NSArray *)otherCards {
     int score = 0;
     
+    if (![otherCards count]) {
+        [Logger Info:[NSString stringWithFormat:@"No other Cards found for %@", self]];
+        return score;
+    }
+    
     if ([otherCards count] == 1) {
         PlayingCard *otherCard = [otherCards objectAtIndex:0];
         
         if (otherCard.rank == self.rank) {
             score = 4;
+            [Logger Info:[NSString stringWithFormat:@"Found rank match: %@ to %@, Score 4.", otherCard, self]];
         } else if ([otherCard.suit isEqualToString:self.suit]) {
             score = 1;
+            [Logger Info:[NSString stringWithFormat:@"Found suit match: %@ to %@, Score 1.", otherCard, self]];
         }
+        
+        return score;
     }
+    
+    // match 2 or more cards:
+    int suitMatch = 0;
+    int rankMatch = 0;
+    
+    for (PlayingCard* otherCard in otherCards) {
+        if (otherCard.rank == self.rank) rankMatch += 1;
+        if (otherCard.suit == self.suit) suitMatch += 1;
+    }
+    
+    score = rankMatch * 4 + suitMatch * 1;
+    [Logger Info:[NSString stringWithFormat:@"Found match: %@ to %@, rankMatch %d, suitMatch %d, Score %d", otherCards, self, rankMatch, suitMatch, score]];
     
     return score;
 }
