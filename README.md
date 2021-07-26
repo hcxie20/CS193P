@@ -16,9 +16,15 @@ Basic staffs. Create a simple view having 12 cards, each cards drawed randomly f
 
 Goal: Create a card-matching game.
 
-Logger: A simple Singleton based log system. All us use [Logger Info:@""] to create and store log in any file. 
+Logger: A simple Singleton based log system. Allow us use 
 ```
 #import "Logger.h"
+
+[Logger Info:@""]
 ```
+to create and store log in any file. 
+
 
 Did not try Extra Credit 1: add UISlider to control log info history. Should be easy if you provided some more interface for the logger (return log entry at some specific index).
+
+When the hack am I going to learn build UI w/ codes only...
