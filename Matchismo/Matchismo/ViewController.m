@@ -8,8 +8,6 @@
 #import "ViewController.h"
 
 #import "Logger.h"
-#import "PlayingCardDeck.h"
-#import "PlayingCard.h"
 #import "CardMatchingGame.h"
 
 @interface ViewController ()
@@ -44,7 +42,7 @@
 }
 
 - (Deck *)createDeck {
-    return [[PlayingCardDeck alloc] init];
+    return nil;
 }
 
 - (void)viewDidLoad {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8400283826B687190091A004 /* TextStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8400283726B687190091A004 /* TextStatsViewController.m */; };
 		84B05C1226A5506C009CD8A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B05C1126A5506C009CD8A0 /* AppDelegate.m */; };
 		84B05C1526A5506C009CD8A0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B05C1426A5506C009CD8A0 /* SceneDelegate.m */; };
 		84B05C1826A5506C009CD8A0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B05C1726A5506C009CD8A0 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8400283626B687190091A004 /* TextStatsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextStatsViewController.h; sourceTree = "<group>"; };
+		8400283726B687190091A004 /* TextStatsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextStatsViewController.m; sourceTree = "<group>"; };
 		84B05C0D26A5506C009CD8A0 /* Attributer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attributer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B05C1026A5506C009CD8A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84B05C1126A5506C009CD8A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -68,6 +71,8 @@
 				84B05C1626A5506C009CD8A0 /* ViewController.h */,
 				84B05C1726A5506C009CD8A0 /* ViewController.m */,
 				84B05C1926A5506C009CD8A0 /* Main.storyboard */,
+				8400283626B687190091A004 /* TextStatsViewController.h */,
+				8400283726B687190091A004 /* TextStatsViewController.m */,
 				84B05C1C26A5506C009CD8A0 /* Assets.xcassets */,
 				84B05C1E26A5506C009CD8A0 /* LaunchScreen.storyboard */,
 				84B05C2126A5506C009CD8A0 /* Info.plist */,
@@ -147,6 +152,7 @@
 			files = (
 				84B05C1826A5506C009CD8A0 /* ViewController.m in Sources */,
 				84B05C1226A5506C009CD8A0 /* AppDelegate.m in Sources */,
+				8400283826B687190091A004 /* TextStatsViewController.m in Sources */,
 				84B05C2326A5506C009CD8A0 /* main.m in Sources */,
 				84B05C1526A5506C009CD8A0 /* SceneDelegate.m in Sources */,
 			);
